@@ -7,7 +7,11 @@ You need to initialize access to Firebase services before using this module.  So
 ```ts
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-admin.initializeApp(functions.config().firebase);
+function initializeFirebase() {
+	if (admin.apps.length === 0) {
+		admin.initializeApp(functions.config().firebase);
+	}
+}
 ```
 
 # Usage
@@ -15,7 +19,7 @@ admin.initializeApp(functions.config().firebase);
  
  ```ts
  const currentUserId = '1234';
- const settings = new FirebaseRTDBConfigurationStore(currentUserId);
+ const settings = new FirebaseRTDBConfigurationStore(initializeFirebase, currentUserId);
  return settings.init().then(() => {...});
  ```
 

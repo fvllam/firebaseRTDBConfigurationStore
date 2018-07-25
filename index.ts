@@ -9,9 +9,11 @@ export interface IConfiguration {
 }
 
 export class FirebaseRTDBConfigurationStore {
-	db = null;
+	db: admin.database.Database;
 
-	constructor(public userID: string) {}
+	constructor(firebaseInitializer: () => void, public userID: string) {
+		firebaseInitializer();
+	}
 
 	private setData<T>(settingsPath: string, value: T): Promise<T> {
 		const dbPath = this.db.ref(settingsPath);
