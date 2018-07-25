@@ -2,7 +2,8 @@
   "name": "firebasertdbconfigurationstore",
   "version": "1.0.0",
   "description": "Simple application settings or document storage using your Firebase project's Realtime database",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
