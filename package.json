@@ -1,0 +1,27 @@
+{
+  "name": "firebasertdbconfigurationstore",
+  "version": "1.0.0",
+  "description": "Simple application settings or document storage using your Firebase project's Realtime database",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvllam/firebaseRTDBConfigurationStore.git"
+  },
+  "author": "FairVentures Lab",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fvllam/firebaseRTDBConfigurationStore/issues"
+  },
+  "homepage": "https://github.com/fvllam/firebaseRTDBConfigurationStore#readme",
+  "devDependencies": {
+    "tslint": "^5.8.0",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "firebase-admin": "^5.13.1"
+  }
+}
