@@ -11,7 +11,7 @@ admin.initializeApp(functions.config().firebase);
 ```
 
 # Usage
-1. Create and initialize the object.
+## Create and initialize the object.
  
  ```ts
  const currentUserId = '1234';
@@ -19,7 +19,7 @@ admin.initializeApp(functions.config().firebase);
  return settings.init().then(() => {...});
  ```
 
-1. Retrieve values by key or get it's default value if a value doesn't exist for the key.
+## Retrieve values by key or get it's default value if a value doesn't exist for the key.
 
 ```ts
 return settings.getGlobalData('someKey', 'default value')
@@ -30,7 +30,7 @@ return settings.getUserData('someOtherKey', 'default value')
 .then(userValue => ...);
 ```
 
-1. Set the key-value pair.
+## Set the key-value pair.
 
 ```ts
 return settings.setGlobalData('someKey', 'some value')
