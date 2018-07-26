@@ -19,7 +19,7 @@ export function initializeFirebase() {
 export class FirebaseRTDBConfigurationStore {
   db: admin.database.Database
 
-  constructor(public userID: string) {}
+  constructor(public userID: string, private globalPath = 'internal/global/', private userPath = 'internal/user/') {}
 
   private setData<T>(settingsPath: string, value: T): Promise<T> {
     const dbPath = this.db.ref(settingsPath)
@@ -42,11 +42,11 @@ export class FirebaseRTDBConfigurationStore {
   }
 
   private getGlobalSettingsPath(key: string): string {
-    return `internal/global/${key}`
+    return `${this.globalPath}${key}`
   }
 
   private getUserSettingsPath(key: string): string {
-    return `internal/user/${this.userID}/${key}`
+    return `${this.userPath}${this.userID}/${key}`
   }
 
   setGlobalData<T>(key: string, value: T): Promise<T> {
