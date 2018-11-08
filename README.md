@@ -1,4 +1,4 @@
-# firebaseRTDBConfigurationStore
+# FirebaseRTDBConfigurationStore
 
 Simple application settings or document storage using your Firebase project's Realtime Database. Global configurations will be stored under `/internal/global/` and user-specific configurations will be stored under `/internal/user/<userId>`.  The paths can be configured by passing optional arguments to the constructor.
 
