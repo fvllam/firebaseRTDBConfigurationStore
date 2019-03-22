@@ -6,14 +6,17 @@ import {
 
 /**
  * Initialize Firebase Admin if it hasn't already been initialized.
+ *
+ * @export
+ * @param {admin.AppOptions} [options] Firebase Configuration
  */
-export function initializeFirebase(): void {
+export function initializeFirebase(options?: admin.AppOptions): void {
   if (admin.apps.length === 0) {
     // admin.initializeApp(functions.config().firebase)
-    admin.initializeApp();
-    console.log("firebase app initialized", admin.apps.length);
+    admin.initializeApp(options);
+    console.log("RTDB Config Store: firebase app initialized: App Count", admin.apps.length);
   } else {
-    console.log("firebase app ALREADY initialized", admin.apps.length);
+    console.log("RTDB Config Store: firebase app ALREADY initialized: App Count", admin.apps.length);
   }
 }
 
