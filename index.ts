@@ -60,8 +60,8 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
   /**
    * Initialize the Configuration Store.  **This step is required to be done before any functionality can be used.**
    */
-  init(): Promise<IConfigurationStore> {
-    initializeFirebase();
+  init<admin.AppOptions>(options: admin.AppOptions): Promise<IConfigurationStore> {
+    initializeFirebase(options);
     this.db = admin.database();
     return Promise.resolve(this);
   }
