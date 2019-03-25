@@ -41,7 +41,7 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
   }
 
   /**
-   * Retreve data from a given path, if there is no entry at the path a default will be created and returned.
+   * Retrieve data from a given path, if there is no entry at the path a default will be created and returned.
    * @param settingsPath Path to where the data will be located within the Realtime Database.
    * @param defaultValue Data to set and return if no data at the given path.
    * 
@@ -58,9 +58,13 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
   }
 
   /**
-   * Initialize the Configuration Store.  **This step is required to be done before any functionality can be used.**
+   *Initialize the Configuration Store.  **This step is required to be done before any functionality can be used.**
+   *
+   * @param {admin.AppOptions} options Firebase Configuration
+   * @returns {Promise<IConfigurationStore>}
+   * @memberof FirebaseRTDBConfigurationStore
    */
-  init<admin.AppOptions>(options: admin.AppOptions): Promise<IConfigurationStore> {
+  init(options: admin.AppOptions): Promise<IConfigurationStore> {
     initializeFirebase(options);
     this.db = admin.database();
     return Promise.resolve(this);
