@@ -31,7 +31,7 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
    */
   protected setData<T>(settingsPath: string, value: T): Promise<T> {
     const dbPath = this.db.ref(settingsPath);
-    return dbPath.update(Object.assign({}, value)).then(() => value);
+    return dbPath.update(Array.isArray(value) ? Object.assign({}, value) : value).then(() => value);
   }
 
   /**
