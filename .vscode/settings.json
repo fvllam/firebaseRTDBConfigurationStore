@@ -1,5 +1,11 @@
 {
-	"cSpell.words": ["RTDB", "Realtime", "configurationstore", "fvlab"],
+	"cSpell.words": [
+		"RTDB",
+		"Realtime",
+		"configurationstore",
+		"firebasertdbconfigurationstore",
+		"fvlab"
+	],
 	"editor.formatOnSave": true,
 	"prettier.printWidth": 110,
 	"prettier.singleQuote": true,
