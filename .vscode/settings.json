@@ -1,0 +1,8 @@
+{
+	"cSpell.words": ["RTDB", "Realtime", "configurationstore", "fvlab"],
+	"editor.formatOnSave": true,
+	"prettier.printWidth": 110,
+	"prettier.singleQuote": true,
+	"prettier.useTabs": true,
+	"prettier.semi": true
+}
