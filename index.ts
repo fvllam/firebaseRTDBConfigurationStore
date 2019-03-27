@@ -24,7 +24,7 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	get db(): admin.database.Database {
 		if (!this._db)
 			console.error(
-				'DB instance not defined, please call one of the init methods before trying to use the Store'
+				'DB instance not defined, please call one of the init methods before trying to use the Store.'
 			);
 		return this._db;
 	}
