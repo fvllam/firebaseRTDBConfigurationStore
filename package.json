@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fvllam/firebaseRTDBConfigurationStore.git"
+    "url": "git+https://github.com/FairVenturesLab/firebaseRTDBConfigurationStore.git"
   },
   "author": "FairVentures Lab",
   "license": "Apache-2.0",
@@ -23,7 +23,8 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@fvlab/configurationstore": "^1.0.3",
+    "@fvlab/configurationstore": "^1.0.5",
     "firebase-admin": "^6.1.0"
-  }
+  },
+  "files": ["dist/**/*"]
 }
