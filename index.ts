@@ -12,11 +12,10 @@ import {
  */
 export function initializeFirebase(options?: admin.AppOptions): void {
   if (admin.apps.length === 0) {
-    // admin.initializeApp(functions.config().firebase)
     admin.initializeApp(options);
-    console.log("RTDB Config Store: firebase app initialized: App Count", admin.apps.length);
+    console.log("RTDB Config Store: firebase app initialized: App Count:", admin.apps.length);
   } else {
-    console.log("RTDB Config Store: firebase app ALREADY initialized: App Count", admin.apps.length);
+    console.log("RTDB Config Store: firebase app ALREADY initialized: App Count:", admin.apps.length);
   }
 }
 
@@ -26,7 +25,20 @@ export function initializeFirebase(options?: admin.AppOptions): void {
 export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
   db: admin.database.Database;
 
-  // constructor(public userID: string, private globalPath = 'internal/global/', private userPath = 'internal/user/') {}
+  /**
+   * Creates an instance of FirebaseRTDBConfigurationStore.
+   * 
+   * @param {string} userID
+   * @param {admin.AppOptions} [options] Firebase Admin Configuration
+   * @param {string} [globalPath]
+   * @param {string} [userPath]
+   * @memberof FirebaseRTDBConfigurationStore
+   */
+  constructor(public userID: string, public options?:admin.AppOptions, globalPath?: string, userPath?: string) {
+    super(userID, globalPath, userPath)
+    initializeFirebase(options);
+    this.db = admin.database();
+  }
 
   /**
    * Store data at the provided path.
@@ -58,15 +70,16 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
   }
 
   /**
-   *Initialize the Configuration Store.  **This step is required to be done before any functionality can be used.**
    *
-   * @param {admin.AppOptions} options Firebase Configuration
-   * @returns {Promise<IConfigurationStore>}
+   *
+   * @protected
+   * @template T
+   * @param {string} settingsPath
+   * @param {T} value
+   * @returns {Promise<T>}
    * @memberof FirebaseRTDBConfigurationStore
    */
-  init(options: admin.AppOptions): Promise<IConfigurationStore> {
-    initializeFirebase(options);
-    this.db = admin.database();
-    return Promise.resolve(this);
+  protected updateData<T>(settingsPath: string, value: T): Promise<T> {
+    throw new Error("Method not implemented.");
   }
 }
