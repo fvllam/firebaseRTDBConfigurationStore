@@ -72,7 +72,8 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 * Initialize with a new instance of Firebase Admin.  To use an external configuration, supply some options.
+	 * Initialize with a new instance of Firebase Admin.  To use an external
+	 * configuration, supply some options.
 	 *
 	 * @param {typeof admin} options Firebase Admin Configuration
 	 * @returns {this} The current instance of the library.
@@ -96,8 +97,10 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 * Retrieve data from a given path, if there is no entry at the path a default will be created and returned.
-	 * @param settingsPath Path to where the data will be located within the Realtime Database.
+	 * Retrieve data from a given path, if there is no entry at the path a default
+	 * will be created and returned.
+	 * @param settingsPath Path to where the data will be located within the
+	 * Realtime Database.
 	 * @param defaultValue Data to set and return if no data at the given path.
 	 *
 	 * @returns Data at given path, or default value if there is no data the path.
