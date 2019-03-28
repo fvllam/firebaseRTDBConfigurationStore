@@ -62,6 +62,69 @@ return settings.setUserData('someOtherKey', 'some value')
 .then(userValue => ...);
 ```
 
+## Update the Data Stored in the Specified Path
+
+```ts
+return settings.updateGlobalData('somePath', 'some value')
+.then(globalValue => ...);
+```
+
+```ts
+return settings.updateGlobalData('someOtherPath', 'some value')
+.then(userValue => ...);
+```
+
+## Supported operations
+
+1. Forward-slash separated path
+
+   ```ts
+   return settings.setGlobalData('some/other/path', 'some value')
+   .then(globalValue => ...);
+   ```
+
+1. Object / Array value
+
+   ```ts
+   return settings
+    .updateGlobalData('somePath', { child1: "value1", child2: 42})
+    .then(globalValue => ...);
+   ```
+
+   ```ts
+   return settings
+    .setGlobalData('somePath', [4, 2])
+    .then(globalValue => ...);
+   ```
+
+1. `set` operations overwrite existing data at the path, `update` operations do not overwrite
+
+   ```js
+   // Current Config Store
+   "apiKeys": {
+     "someService": "some-api-key"
+   }
+   ```
+
+   ```ts
+   settings.updateGlobalData('apiKeys', { someOtherService: 'some-other-api-key' });
+
+   // Expected Config Store
+   "apiKeys": {
+     "someService": "some-api-key",
+     "someOtherService": "some-other-api-key"
+   }
+   ```
+
+   ```ts
+   settings.setGlobalData('apiKeys', { anotherService: 'another-api-key' });
+
+   // Expected Config Store
+   "apiKeys": {
+     "anotherService": "another-api-key"
+   }
+   ```
+
 # Generate Documentation
 
 Documentation within this project is generated via [Typedoc](https://typedoc.org).

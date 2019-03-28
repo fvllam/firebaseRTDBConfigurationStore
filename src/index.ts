@@ -84,7 +84,7 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 		return this;
 	}
 	/**
-	 * Store data at the provided path.
+	 * Store data at the provided path. Overwrites existing data at that path.
 	 *
 	 * @param settingsPath Path to where the data will be located within the Realtime Database.
 	 * @param value Data to set at the specified path.
@@ -112,16 +112,17 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 *
+	 * Updates the data stored at the provided path without overwriting existing
+	 * data.
 	 *
 	 * @protected
-	 * @template T
-	 * @param {string} settingsPath
-	 * @param {T} value
-	 * @returns {Promise<T>}
+	 * @param {string} settingsPath Path to where the data will be located within the Realtime Database.
+	 * @param {T} value Data to update and return.
+	 * @returns {Promise<T>} Data that was set
 	 * @memberof FirebaseRTDBConfigurationStore
 	 */
 	protected updateData<T>(settingsPath: string, value: T): Promise<T> {
-		throw new Error('Method not implemented.');
+		const dbPath = this.db.ref(settingsPath);
+		return dbPath.update(Array.isArray(value) ? Object.assign({}, value) : value).then(() => value);
 	}
 }
