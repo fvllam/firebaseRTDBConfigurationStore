@@ -58,7 +58,8 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 * Initialize with a new instance of Firebase Admin.  To use an external configuration, supply some options.
+	 * Initialize with a new instance of Firebase Admin.  To use an external
+	 * configuration, supply some options.
 	 *
 	 * @param {typeof admin} options Firebase Admin Configuration
 	 * @returns {this}
@@ -70,8 +71,9 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 		return this;
 	}
 	/**
-	 * Store data at the provided path.
-	 * @param settingsPath Path to where the data will be located within the Realtime Database.
+	 * Store data at the provided path. Overwrites existing data at that path
+	 * @param settingsPath Path to where the data will be located within the
+	 * Realtime Database.
 	 * @param value Data to set at the specified path.
 	 *
 	 * @returns Data that was set.
@@ -82,8 +84,10 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 * Retrieve data from a given path, if there is no entry at the path a default will be created and returned.
-	 * @param settingsPath Path to where the data will be located within the Realtime Database.
+	 * Retrieve data from a given path, if there is no entry at the path a default
+	 * will be created and returned.
+	 * @param settingsPath Path to where the data will be located within the
+	 * Realtime Database.
 	 * @param defaultValue Data to set and return if no data at the given path.
 	 *
 	 * @returns Data at given path, or default value if there is no data the path.
@@ -98,16 +102,17 @@ export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
 	}
 
 	/**
-	 *
+	 * Updates the data stored at the provided path without overwriting existing
+	 * data
 	 *
 	 * @protected
-	 * @template T
 	 * @param {string} settingsPath
 	 * @param {T} value
-	 * @returns {Promise<T>}
+	 * @returns {Promise<T>} Data that was set
 	 * @memberof FirebaseRTDBConfigurationStore
 	 */
 	protected updateData<T>(settingsPath: string, value: T): Promise<T> {
-		throw new Error('Method not implemented.');
+		const dbPath = this.db.ref(settingsPath);
+		return dbPath.update(Array.isArray(value) ? Object.assign({}, value) : value).then(() => value);
 	}
 }
