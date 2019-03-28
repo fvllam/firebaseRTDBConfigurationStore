@@ -1,10 +1,11 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
-    "noImplicitReturns": true,
-    "declaration": true,
+		"noImplicitReturns": true,
+		"declaration": true,
 		"outDir": "./dist",
 		"target": "es6"
 	},
-	"compileOnSave": true
+	"compileOnSave": true,
+	"files": ["./src/index.ts"]
 }
