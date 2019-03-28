@@ -4,7 +4,8 @@
 		"Realtime",
 		"configurationstore",
 		"firebasertdbconfigurationstore",
-		"fvlab"
+		"fvlab",
+		"typeof"
 	],
 	"editor.formatOnSave": true,
 	"prettier.printWidth": 110,

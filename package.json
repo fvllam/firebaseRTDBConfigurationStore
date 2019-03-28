@@ -7,7 +7,8 @@
 	"scripts": {
 		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"prepublish": "tsc"
+		"prepublish": "tsc",
+		"docs": "./node_modules/.bin/typedoc --name \"Firebase Realtime Database Configuration Store\" --theme minimal --out ./docs/ --target ES6 --module commonjs --exclude \"**/{dist,docs,node_modules}/**/*\" ./src"
 	},
 	"repository": {
 		"type": "git",
@@ -21,6 +22,7 @@
 	"homepage": "https://github.com/FairVenturesLab/firebaseRTDBConfigurationStore#readme",
 	"devDependencies": {
 		"tslint": "^5.8.0",
+		"typedoc": "^0.14.2",
 		"typescript": "^2.5.3"
 	},
 	"dependencies": {
