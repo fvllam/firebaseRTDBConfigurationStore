@@ -61,3 +61,11 @@ return settings.setGlobalData('someKey', 'some value')
 return settings.setUserData('someOtherKey', 'some value')
 .then(userValue => ...);
 ```
+
+# Generate Documentation
+
+Documentation within this project is generated via [Typedoc](https://typedoc.org).
+
+```bassh
+npm run docs
+```
