@@ -35,6 +35,3 @@ jspm_packages
 !**/.vscode/tasks.json
 !**/.vscode/launch.json
 !**/.vscode/settings.json
-
-# Typedoc Output
-docs
