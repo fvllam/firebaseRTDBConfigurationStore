@@ -1,65 +1,113 @@
-import * as admin from "firebase-admin";
-import {
-  BaseConfigurationStore,
-  IConfigurationStore
-} from "@fvlab/configurationstore";
+import * as admin from 'firebase-admin';
+import { BaseConfigurationStore, IConfigurationStore } from '@fvlab/configurationstore';
 
 /**
  * Initialize Firebase Admin if it hasn't already been initialized.
+ *
+ * @export
+ * @param {admin.AppOptions} [options] Firebase Configuration
  */
-export function initializeFirebase(): void {
-  if (admin.apps.length === 0) {
-    // admin.initializeApp(functions.config().firebase)
-    admin.initializeApp();
-    console.log("firebase app initialized", admin.apps.length);
-  } else {
-    console.log("firebase app ALREADY initialized", admin.apps.length);
-  }
+export function initializeFirebase(options?: admin.AppOptions): void {
+	if (admin.apps.length === 0) {
+		admin.initializeApp(options);
+		console.log('RTDB Config Store: firebase app initialized: App Count:', admin.apps.length);
+	} else {
+		console.log('RTDB Config Store: firebase app ALREADY initialized: App Count:', admin.apps.length);
+	}
 }
 
 /**
  * Firebase Realtime Database Configuration Store
  */
 export class FirebaseRTDBConfigurationStore extends BaseConfigurationStore {
-  db: admin.database.Database;
+	private _db: admin.database.Database;
+	get db(): admin.database.Database {
+		if (!this._db)
+			console.error(
+				'DB instance not defined, please call one of the init methods before trying to use the Store.'
+			);
+		return this._db;
+	}
+	set db(theDb: admin.database.Database) {
+		this._db = theDb;
+	}
 
-  // constructor(public userID: string, private globalPath = 'internal/global/', private userPath = 'internal/user/') {}
+	/**
+	 * Creates an instance of FirebaseRTDBConfigurationStore.
+	 *
+	 * @param {string} userID
+	 * @param {admin.AppOptions} [options] Firebase Admin Configuration
+	 * @param {string} [globalPath]
+	 * @param {string} [userPath]
+	 * @memberof FirebaseRTDBConfigurationStore
+	 */
+	constructor(public userID: string, globalPath?: string, userPath?: string) {
+		super(userID, globalPath, userPath);
+	}
 
-  /**
-   * Store data at the provided path.
-   * @param settingsPath Path to where the data will be located within the Realtime Database.
-   * @param value Data to set at the specified path.
-   * 
-   * @returns Data that was set.
-   */
-  protected setData<T>(settingsPath: string, value: T): Promise<T> {
-    const dbPath = this.db.ref(settingsPath);
-    return dbPath.set(value).then(() => value);
-  }
+	/**
+	 * Initialize with a preexisting instance of Firebase Admin.
+	 *
+	 * @param {typeof admin} firebaseAdminInstance A preexisting instance of Firebase admin.
+	 * @returns {this}
+	 * @memberof FirebaseRTDBConfigurationStore
+	 */
+	public initWithAdminInstance(firebaseAdminInstance: typeof admin): this {
+		this.db = firebaseAdminInstance.database();
+		return this;
+	}
 
-  /**
-   * Retreve data from a given path, if there is no entry at the path a default will be created and returned.
-   * @param settingsPath Path to where the data will be located within the Realtime Database.
-   * @param defaultValue Data to set and return if no data at the given path.
-   * 
-   * @returns Data at given path, or default value if there is no data the path.
-   */
-  protected getData<T>(settingsPath: string, defaultValue?: T): Promise<T> {
-    const dbPath = this.db.ref(settingsPath);
-    return dbPath.once("value").then(data => {
-      const val = data.val();
-      if (val === null && defaultValue !== undefined)
-        return this.setData(settingsPath, defaultValue);
-      return val;
-    });
-  }
+	/**
+	 * Initialize with a new instance of Firebase Admin.  To use an external configuration, supply some options.
+	 *
+	 * @param {typeof admin} options Firebase Admin Configuration
+	 * @returns {this}
+	 * @memberof FirebaseRTDBConfigurationStore
+	 */
+	public init(options?: admin.AppOptions): this {
+		initializeFirebase(options);
+		this.db = admin.database();
+		return this;
+	}
+	/**
+	 * Store data at the provided path.
+	 * @param settingsPath Path to where the data will be located within the Realtime Database.
+	 * @param value Data to set at the specified path.
+	 *
+	 * @returns Data that was set.
+	 */
+	protected setData<T>(settingsPath: string, value: T): Promise<T> {
+		const dbPath = this.db.ref(settingsPath);
+		return dbPath.set(value).then(() => value);
+	}
 
-  /**
-   * Initialize the Configuration Store.  **This step is required to be done before any functionality can be used.**
-   */
-  init(): Promise<IConfigurationStore> {
-    initializeFirebase();
-    this.db = admin.database();
-    return Promise.resolve(this);
-  }
+	/**
+	 * Retrieve data from a given path, if there is no entry at the path a default will be created and returned.
+	 * @param settingsPath Path to where the data will be located within the Realtime Database.
+	 * @param defaultValue Data to set and return if no data at the given path.
+	 *
+	 * @returns Data at given path, or default value if there is no data the path.
+	 */
+	protected getData<T>(settingsPath: string, defaultValue?: T): Promise<T> {
+		const dbPath = this.db.ref(settingsPath);
+		return dbPath.once('value').then(data => {
+			const val = data.val();
+			if (val === null && defaultValue !== undefined) return this.setData(settingsPath, defaultValue);
+			return val;
+		});
+	}
+
+	/**
+	 *
+	 *
+	 * @protected
+	 * @template T
+	 * @param {string} settingsPath
+	 * @param {T} value
+	 * @returns {Promise<T>}
+	 * @memberof FirebaseRTDBConfigurationStore
+	 */
+	protected updateData<T>(settingsPath: string, value: T): Promise<T> {
+		throw new Error('Method not implemented.');
+	}
 }
