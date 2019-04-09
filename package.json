@@ -1,6 +1,6 @@
 {
 	"name": "@fvlab/firebasertdbconfigurationstore",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Simple application settings or document storage using your Firebase project's Realtime database",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -23,11 +23,11 @@
 	"devDependencies": {
 		"tslint": "^5.8.0",
 		"typedoc": "^0.14.2",
-		"typescript": "^2.5.3"
+		"typescript": "^3.4.2"
 	},
 	"dependencies": {
 		"@fvlab/configurationstore": "^1.0.5",
-		"firebase-admin": "^6.1.0"
+		"firebase-admin": "^7.2.0"
 	},
 	"files": [
 		"dist/**/*"
