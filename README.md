@@ -35,7 +35,7 @@ public initWithAdminInstance(firebaseAdminInstance: typeof admin): this
 ```ts
 const currentUserId = '1234';
 const settings = new FirebaseRTDBConfigurationStore(currentUserId, '/custom/pathToGlobalConfig/', '/custom/pathToUserConfig');
-return settings.init().then(() => {...});
+return settings.init();
 ```
 
 ## Retrieve values by key or get it's default value if a value doesn't exist for the key.
