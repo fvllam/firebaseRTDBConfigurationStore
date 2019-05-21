@@ -2,6 +2,8 @@
 
 Simple application settings or document storage using your Firebase project's Realtime Database. Global configurations will be stored under `/internal/global/` and user-specific configurations will be stored under `/internal/user/<userId>`. The paths can be configured by passing optional arguments to the constructor.
 
+[NPM Package](https://www.npmjs.com/package/@fvlab/firebasertdbconfigurationstore)
+
 # Prerequisite
 
 This module can be used within a Firebase project since it can implicitly initialize the Firebase app to access the project's Firebase services. It can also be used in a standalone project, such as with [Express](https://expressjs.com/).
